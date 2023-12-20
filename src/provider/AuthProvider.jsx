@@ -31,9 +31,10 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const updateUserProfile = (name) => {
+    const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
-            displayName: name
+            displayName: name, 
+            photoURL: photo
         });
     }
     const logOut = () => {
@@ -49,7 +50,8 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log(`Current user :`, currentUser)
+            console.log(`Current user :`, currentUser);
+            setLoading(false);
         })
         return () => unsubscribe();
     },[])

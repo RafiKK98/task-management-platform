@@ -6,14 +6,13 @@ const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
 
     if (loading) {
-        <span> Loading... </span>
+        return <span> Loading... </span>
     }
 
     if (user) {
         return children
     }
-
-    return <Navigate to="/login" />
+    <Navigate to="/login" />
 }
 
 export default PrivateRoute
