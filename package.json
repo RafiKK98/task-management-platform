@@ -12,6 +12,7 @@
   "dependencies": {
     "firebase": "^10.7.1",
     "react": "^18.2.0",
+    "react-clock": "^4.6.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
     "react-pro-sidebar": "^1.1.0-alpha.1",
