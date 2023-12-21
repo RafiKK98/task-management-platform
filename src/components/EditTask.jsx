@@ -26,7 +26,7 @@ const EditTask = () => {
             deadline: updatedDeadline,
             priority: updatedPriority
         };
-        fetch(`http://localhost:5000/tasks/${taskId}`, {
+        fetch(`https://task-management-platform-server-chi.vercel.app/tasks/${taskId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

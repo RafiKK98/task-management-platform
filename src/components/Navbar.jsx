@@ -24,9 +24,9 @@ const Navbar = () => {
     }
 
     const navLinks = <>
-        <li className="mr-4"><NavLink to="/" className="bg-primary active:bg-secondary">Home</NavLink></li>
-        <li className="mr-4"><NavLink to="/about" className="bg-primary active:bg-secondary">About</NavLink></li>
-        <li className="mr-4"><NavLink to="/contact" className="bg-primary active:bg-secondary">Contact</NavLink></li>
+        <li className="mr-4"><NavLink to="/" className="bg-primary active:bg-secondary rounded-md">Home</NavLink></li>
+        <li className="mr-4"><NavLink to="/about" className="bg-primary active:bg-secondary rounded-md">About</NavLink></li>
+        <li className="mr-4"><NavLink to="/contact" className="bg-primary active:bg-secondary rounded-md">Contact</NavLink></li>
     </>
 
 

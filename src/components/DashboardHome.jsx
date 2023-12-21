@@ -11,7 +11,7 @@ const DashboardHome = () => {
     const [ tasks, tasksLoading, refetch ] = useTasks();
 
     const handleDeleteTask = id => {
-        fetch(`http://localhost:5000/tasks/${id}`, {
+        fetch(`https://task-management-platform-server-chi.vercel.app/tasks/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -31,7 +31,7 @@ const DashboardHome = () => {
         })
     }
     const handleTaskComplete = id => {
-        fetch(`http://localhost:5000/tasks/${id}`, {
+        fetch(`https://task-management-platform-server-chi.vercel.app/tasks/${id}`, {
             method: "PATCH"
         })
         .then(res => res.json())

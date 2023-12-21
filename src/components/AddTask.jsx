@@ -27,7 +27,7 @@ const AddTask = () => {
             status: 'Ongoing'
         }
 
-        fetch('http://localhost:5000/tasks', {
+        fetch('https://task-management-platform-server-chi.vercel.app/tasks', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
