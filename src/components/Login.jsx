@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
 
-    const { signIn, setUser } = useAuth();
+    const { signIn, setUser, googleSignIn } = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = event => {
@@ -33,8 +34,25 @@ const Login = () => {
         .catch(error => console.log(`Error: ${error}`))
     }
 
+    const handleGoogleLogin = () => {
+        googleSignIn()
+        .then((result) => {
+            const loggedUser = result.user;
+            setUser(loggedUser);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'User logged in successfully.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            navigate('/dashboard');
+        })
+        .catch(error => console.log(`Error: ${error}`))
+    }
+
     return (
-        <div className="flex flex-col justify-center gap-10 h-screen">
+        <div className="flex flex-col justify-center gap-5 h-screen">
             <h1 className="text-center text-3xl">Welcome Back</h1>
             <form onSubmit={handleLogin} className="max-w-md w-96 mx-auto p-5 border-2 border-secondary rounded-xl">
                 <div className="relative z-0 w-full mb-5 group">
@@ -49,6 +67,9 @@ const Login = () => {
             </form>
             <p className="text-center">New user? Please <Link to="/signup" className="text-primary">Sign up</Link></p>
             <p className="text-center">Back to <Link to="/" className="text-primary">Home</Link></p>
+            <div className="text-center flex mx-auto">
+                <button onClick={handleGoogleLogin} className="btn btn-primary rounded-lg text-white"><FaGoogle /></button>
+            </div>
         </div>
     );
 }
