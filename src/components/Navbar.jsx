@@ -1,16 +1,37 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
 
+    const { user, logOut, setUser } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logOut()
+        .then(() => {
+            setUser(null);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'User logged out successfully.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            navigate('/login');
+        })
+        .catch(error => console.log(`Error: ${error}`))
+    }
+
     const navLinks = <>
-        <li><NavLink to="/" className="mr-4">Home</NavLink></li>
-        <li><NavLink to="/" className="mr-4">About</NavLink></li>
-        <li><NavLink to="/" className="mr-4">Contact</NavLink></li>
+        <li className="mr-4"><NavLink to="/" className="bg-primary active:bg-secondary">Home</NavLink></li>
+        <li className="mr-4"><NavLink to="/about" className="bg-primary active:bg-secondary">About</NavLink></li>
+        <li className="mr-4"><NavLink to="/contact" className="bg-primary active:bg-secondary">Contact</NavLink></li>
     </>
 
 
     return (
-        <div className="navbar">
+        <div className="navbar bg-slate-500">
             {/* Navbar start */}
             <div className="navbar-start lg:hidden">
                 <div className="dropdown">
@@ -36,7 +57,27 @@ const Navbar = () => {
             </div>
             {/* Navbar end */}
             <div className="navbar-end">
-                <Link to="/login" className="btn lg:w-32">Login</Link>
+                {
+                    user ? 
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img alt="User avatar" src={user.photoURL} />
+                            </div>
+                        </label>
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li>
+                                <a className="justify-between">
+                                    {user.displayName}
+                                </a>
+                            </li>
+                            <li><Link to={"/dashboard"}>Dashboard</Link></li>
+                            <li onClick={handleLogout}><a>Logout</a></li>
+                        </ul>
+                    </div>
+                    :
+                    <Link to="/login" className="btn btn-primary text-white lg:w-32">Login</Link>
+                }
             </div>
         </div>
     );

@@ -1,10 +1,12 @@
 import Banner from "./Banner";
+import TargetAudienceSection from "./TargetAudienceSection";
 
 const Home = () => {
     return (
-        <div>
+        <>
             <Banner />
-        </div>
+            <TargetAudienceSection />
+        </>
     );
 }
 

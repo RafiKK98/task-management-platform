@@ -8,6 +8,9 @@ import DashboardHome from "../components/DashboardHome";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import AddTask from "../components/AddTask";
+import EditTask from "../components/EditTask";
+import HomeError from "../components/HomeError";
 
 const router = createBrowserRouter([
     {
@@ -19,15 +22,25 @@ const router = createBrowserRouter([
                 element: <Home />
             }
         ],
+        errorElement: <HomeError />
     },
     {
-        path: 'dashboard',
+        path: '/dashboard',
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
                 path: '',
                 element: <DashboardHome />
-            }
+            },
+            {
+                path: 'addTask',
+                element: <AddTask />
+            },
+            {
+                path: 'editTask/:taskId',
+                element: <EditTask />,
+                loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.taskId}`),
+            },
         ]
     },
     {
